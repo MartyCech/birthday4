@@ -1,5 +1,36 @@
+# ---- Operační systém / editor ----
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+.idea/
+.vscode/
+
+# ---- Tajné údaje / konfigurace ----
+.env
+.env.*
+*.local
+secrets*.json
+config.private.*
+
+# ---- Data registrací / exporty odpovědí (NIKDY do public repa) ----
+registrace*
+odpovedi*
+responses*
+submissions*
+rsvp-export*
+*.csv
+*.xlsx
+*.sqlite
+*.db
+
+# ---- Dočasné soubory / vývoj ----
 .playwright-mcp/
 *.log
 verify*.png
 dino-raw.png
+node_modules/
+tmp/
+*.tmp

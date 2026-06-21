@@ -227,6 +227,10 @@ body {
   box-shadow: 0 6px 14px rgba(232, 133, 43, 0.5);
   transform: rotate(-16deg);
 }
+.age-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
 
 @keyframes ride {
   0%, 100% { transform: translateY(0) rotate(-1.5deg); }

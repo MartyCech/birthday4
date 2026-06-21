@@ -121,6 +121,16 @@
       <!-- skryté pole pro hezčí předmět e-mailu z Formspree -->
       <input type="hidden" name="_subject" value="Registrace na 4. narozeniny Kikouše" />
 
+      <!-- honeypot: skryté pole, které vidí jen roboti; když ho vyplní, Formspree submit zahodí -->
+      <input
+        type="text"
+        name="_gotcha"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+        style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"
+      />
+
       <button type="submit" class="submit-btn">
         Odeslat 🦕
       </button>
@@ -190,8 +200,16 @@
       resultView.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
+    const submitBtn = form.querySelector(".submit-btn");
+    let isSubmitting = false;
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      // zamezení dvojího odeslání (rychlé opakované kliknutí / čekání na odpověď)
+      if (isSubmitting) return;
+      isSubmitting = true;
+      if (submitBtn) submitBtn.disabled = true;
+
       const ucast = (new FormData(form).get("ucast") || "ANO").toString();
       status.className = "status";
       status.textContent = "Odesílám… 🦕";
@@ -209,11 +227,15 @@
           status.className = "status err";
           status.textContent =
             "Něco se nepovedlo. Zkus to prosím znovu. 🦴";
+          isSubmitting = false;
+          if (submitBtn) submitBtn.disabled = false;
         }
       } catch (err) {
         status.className = "status err";
         status.textContent =
           "Nepodařilo se odeslat. Zkontroluj připojení a zkus to znovu. 🦴";
+        isSubmitting = false;
+        if (submitBtn) submitBtn.disabled = false;
       }
     });
   </script>

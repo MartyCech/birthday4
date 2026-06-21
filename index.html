@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🦕 3. narozeniny Kikouše Čecha</title>
-  <meta name="description" content="Pozvánka na 3. narozeniny Kikouše Čecha v Dinolive. Dej nám vědět, jestli dorazíš!" />
+  <title>🦕 4. narozeniny Kikouše Čecha</title>
+  <meta name="description" content="Pozvánka na 4. narozeniny Kikouše Čecha v Dinolive. Dej nám vědět, jestli dorazíš!" />
 
   <!-- Open Graph (náhled při sdílení odkazu / QR kódu) -->
-  <meta property="og:title" content="🦕 3. narozeniny Kikouše Čecha" />
+  <meta property="og:title" content="🦕 4. narozeniny Kikouše Čecha" />
   <meta property="og:description" content="Moc se na vás těším. Dejte mi vědět, jestli dorazíte!" />
   <meta property="og:image" content="kikous.png" />
   <meta property="og:type" content="website" />
@@ -37,7 +37,7 @@
   <main class="card">
     <div class="banner">
       <span class="banner-dino left">🦖</span>
-      <h1>3. narozeniny<br /><span class="name">Kikouše Čecha</span></h1>
+      <h1>4. narozeniny<br /><span class="name">Kikouše Čecha</span></h1>
       <span class="banner-dino right">🦕</span>
       <div class="dinolife-badge">V Dinolife</div>
     </div>
@@ -77,7 +77,7 @@
           <img src="kikous.png" alt="Kikouš Čech" />
         </div>
 
-        <span class="age-badge">3 🎂</span>
+        <span class="age-badge">4 🎂</span>
       </div>
     </div>
 
@@ -119,7 +119,7 @@
       </label>
 
       <!-- skryté pole pro hezčí předmět e-mailu z Formspree -->
-      <input type="hidden" name="_subject" value="Registrace na 3. narozeniny Kikouše" />
+      <input type="hidden" name="_subject" value="Registrace na 4. narozeniny Kikouše" />
 
       <button type="submit" class="submit-btn">
         Odeslat 🦕
@@ -149,6 +149,11 @@
       </a>
     </section>
 
+    <section class="result" id="result-view" hidden aria-live="polite">
+      <div class="result-emoji" id="result-emoji">🎉</div>
+      <p class="result-msg" id="result-msg"></p>
+    </section>
+
     <footer class="foot">🦕 🦖 🌿 🥚 🦴 🌋</footer>
   </main>
 
@@ -156,9 +161,38 @@
     // Odeslání formuláře přes Formspree bez přesměrování (AJAX)
     const form = document.getElementById("rsvp-form");
     const status = document.getElementById("status");
+    const card = document.querySelector(".card");
+    const resultView = document.getElementById("result-view");
+    const resultEmoji = document.getElementById("result-emoji");
+    const resultMsg = document.getElementById("result-msg");
+
+    const MESSAGES = {
+      ANO: {
+        text: "Děkuji za reakci, budu se na tebe moooooc těšit. Kikouš :)",
+        emoji: "🎉🦕",
+        cls: "yes",
+      },
+      NE: {
+        text: "Je mi líto, že nedorazíš, ale děkuji, že jsi mi dal vědět. Užij si prááááázdniny",
+        emoji: "🌴😢",
+        cls: "no",
+      },
+    };
+
+    function showResult(ucast) {
+      const m = MESSAGES[ucast] || MESSAGES.ANO;
+      resultEmoji.textContent = m.emoji;
+      resultMsg.textContent = m.text;
+      resultView.classList.remove("yes", "no");
+      resultView.classList.add(m.cls);
+      resultView.hidden = false;
+      card.classList.add("submitted");
+      resultView.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const ucast = (new FormData(form).get("ucast") || "ANO").toString();
       status.className = "status";
       status.textContent = "Odesílám… 🦕";
 
@@ -170,10 +204,7 @@
         });
 
         if (res.ok) {
-          form.reset();
-          status.className = "status ok";
-          status.textContent = "Děkujeme! Tvoje odpověď dorazila. 🎉🦕";
-          form.style.display = "none";
+          showResult(ucast);
         } else {
           status.className = "status err";
           status.textContent =

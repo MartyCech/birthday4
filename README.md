@@ -1,4 +1,4 @@
-# 🦕 Pozvánka — 3. narozeniny Kikouše Čecha
+# 🦕 Pozvánka — 4. narozeniny Kikouše Čecha
 
 Jednoduchá statická stránka (pozvánka + registrační formulář) pro GitHub Pages.
 Registrace chodí přes **Formspree**, kde je uvidíš online po přihlášení.
@@ -68,7 +68,7 @@ QR vytiskni na pozvánky — po naskenování se otevře tato stránka.
 ---
 
 ## Co stránka obsahuje
-- Nadpis **3. narozeniny Kikouše Čecha** + fotka
+- Nadpis **4. narozeniny Kikouše Čecha** + fotka
 - Text: *Moc se na vás těším. Dejte mi vědět, jestli dorazíte.*
 - Formulář: **Oslavy se zúčastním: ANO / NE** + **Jméno dítěte**
 - Poznámka o vstupném (Dinolive, 200 Kč pro dospělé)

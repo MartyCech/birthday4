@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🦕 3. narozeniny Kikouše Čecha</title>
+  <meta name="description" content="Pozvánka na 3. narozeniny Kikouše Čecha v Dinolive. Dej nám vědět, jestli dorazíš!" />
+
+  <!-- Open Graph (náhled při sdílení odkazu / QR kódu) -->
+  <meta property="og:title" content="🦕 3. narozeniny Kikouše Čecha" />
+  <meta property="og:description" content="Moc se na vás těším. Dejte mi vědět, jestli dorazíte!" />
+  <meta property="og:image" content="kikous.png" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦕</text></svg>" />
+
+  <!-- Fonty -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Plovoucí dinosauři v pozadí -->
+  <div class="floating-dinos" aria-hidden="true">
+    <span class="dino d1">🦕</span>
+    <span class="dino d2">🦖</span>
+    <span class="dino d3">🌿</span>
+    <span class="dino d4">🥚</span>
+    <span class="dino d5">🦴</span>
+    <span class="dino d6">🌴</span>
+    <span class="dino d7">🦕</span>
+    <span class="dino d8">🌋</span>
+  </div>
+
+  <main class="card">
+    <div class="banner">
+      <span class="banner-dino left">🦖</span>
+      <h1>3. narozeniny<br /><span class="name">Kikouše Čecha</span></h1>
+      <span class="banner-dino right">🦕</span>
+      <div class="dinolife-badge">V Dinolife</div>
+    </div>
+
+    <div class="ride" aria-label="Kikouš jede na T-rexovi">
+      <div class="scene-bob">
+        <object type="image/svg+xml" data="runningdino.svg" class="ride-dino" aria-label="Běžící dinosaurus T-rex"></object>
+
+        <svg class="rider" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="shirtG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ff8aa0" />
+              <stop offset="1" stop-color="#ff6b6b" />
+            </linearGradient>
+          </defs>
+
+          <!-- tričko -->
+          <path d="M40 24 C56 14 80 18 86 36 L90 72 C72 86 48 84 38 66 Z" fill="url(#shirtG)" />
+          <circle cx="54" cy="44" r="4.5" fill="#ffd0d8" />
+          <circle cx="70" cy="54" r="3.5" fill="#ffd0d8" />
+          <circle cx="60" cy="62" r="3" fill="#ffd0d8" />
+
+          <!-- bližší noha (pokrčená) -->
+          <path d="M62 72 C80 80 98 88 98 104" fill="none" stroke="#4a78c4" stroke-width="19" stroke-linecap="round" />
+          <ellipse cx="99" cy="108" rx="15" ry="8" fill="#ff6b6b" />
+
+          <!-- ruce držící krk -->
+          <path d="M82 34 C102 36 118 46 130 60" fill="none" stroke="#f6c9a0" stroke-width="12" stroke-linecap="round" />
+          <path d="M78 42 C98 46 114 56 126 70" fill="none" stroke="#f6c9a0" stroke-width="12" stroke-linecap="round" />
+          <circle cx="80" cy="34" r="11" fill="url(#shirtG)" />
+          <circle cx="76" cy="42" r="11" fill="url(#shirtG)" />
+          <circle cx="131" cy="61" r="8" fill="#f6c9a0" />
+          <circle cx="127" cy="71" r="8" fill="#f6c9a0" />
+        </svg>
+
+        <div class="rider-head">
+          <img src="kikous.png" alt="Kikouš Čech" />
+        </div>
+
+        <span class="age-badge">3 🎂</span>
+      </div>
+    </div>
+
+    <p class="lead">
+      Moc se na vás těším. 🦕<br />
+      Dejte mi vědět, jestli dorazíte.
+    </p>
+
+    <!-- ===== FORMULÁŘ ===== -->
+    <form
+      id="rsvp-form"
+      class="rsvp"
+      action="https://formspree.io/f/xdarnblo"
+      method="POST"
+    >
+      <fieldset class="attend">
+        <legend>Oslavy se zúčastním:</legend>
+        <div class="choices">
+          <label class="choice yes">
+            <input type="radio" name="ucast" value="ANO" required />
+            <span>ANO 🎉</span>
+          </label>
+          <label class="choice no">
+            <input type="radio" name="ucast" value="NE" />
+            <span>NE 😢</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <label class="field">
+        <span class="field-label">Jméno dítěte</span>
+        <input
+          type="text"
+          name="jmeno_ditete"
+          placeholder="Napiš jméno…"
+          autocomplete="off"
+          required
+        />
+      </label>
+
+      <!-- skryté pole pro hezčí předmět e-mailu z Formspree -->
+      <input type="hidden" name="_subject" value="Registrace na 3. narozeniny Kikouše" />
+
+      <button type="submit" class="submit-btn">
+        Odeslat 🦕
+      </button>
+    </form>
+
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+
+    <div class="note">
+      Počet dospělých není omezen. Vstupné do Dinolive je zaplaceno dětem,
+      dospělý platí snížené vstupné 200 Kč. Celá výstava je přístupná.
+    </div>
+
+    <section class="place">
+      <h2>📍 Místo konání</h2>
+      <p class="place-name">
+        <a href="https://dinolive.cz/" target="_blank" rel="noopener">Dinolive</a>
+        — Koupaliště Džbán, Praha 6
+      </p>
+      <a
+        class="map-btn"
+        href="https://www.google.com/maps/search/?api=1&query=50.097267,14.333780"
+        target="_blank"
+        rel="noopener"
+      >
+        🗺️ Otevřít v mapě
+      </a>
+    </section>
+
+    <footer class="foot">🦕 🦖 🌿 🥚 🦴 🌋</footer>
+  </main>
+
+  <script>
+    // Odeslání formuláře přes Formspree bez přesměrování (AJAX)
+    const form = document.getElementById("rsvp-form");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      status.className = "status";
+      status.textContent = "Odesílám… 🦕";
+
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (res.ok) {
+          form.reset();
+          status.className = "status ok";
+          status.textContent = "Děkujeme! Tvoje odpověď dorazila. 🎉🦕";
+          form.style.display = "none";
+        } else {
+          status.className = "status err";
+          status.textContent =
+            "Něco se nepovedlo. Zkus to prosím znovu. 🦴";
+        }
+      } catch (err) {
+        status.className = "status err";
+        status.textContent =
+          "Nepodařilo se odeslat. Zkontroluj připojení a zkus to znovu. 🦴";
+      }
+    });
+  </script>
+</body>
+</html>

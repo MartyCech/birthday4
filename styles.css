@@ -1,0 +1,443 @@
+:root {
+  --green: #3aa760;
+  --green-dark: #1f7a44;
+  --green-light: #c6f0d2;
+  --leaf: #8ed081;
+  --sand: #fff7e6;
+  --sand-deep: #ffe9bf;
+  --orange: #ff9f43;
+  --orange-dark: #e8852b;
+  --red: #ff6b6b;
+  --ink: #2b3a2f;
+  --shadow: 0 18px 40px rgba(31, 122, 68, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Winky Sans", sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 10%, #bdeacb 0, transparent 45%),
+    radial-gradient(circle at 85% 20%, #ffe1a8 0, transparent 40%),
+    radial-gradient(circle at 50% 100%, #a7e0b9 0, transparent 55%),
+    linear-gradient(160deg, #e8fbef 0%, #d2f5dd 50%, #fdf3d6 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px 48px;
+  overflow-x: hidden;
+}
+
+/* ---------- Plovoucí dinosauři v pozadí ---------- */
+.floating-dinos {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.dino {
+  position: absolute;
+  font-size: 2.6rem;
+  opacity: 0.35;
+  animation: float 9s ease-in-out infinite;
+}
+.d1 { top: 8%;  left: 6%;  animation-delay: 0s;   font-size: 3.4rem; }
+.d2 { top: 18%; right: 8%; animation-delay: 1.2s; font-size: 3rem; }
+.d3 { top: 46%; left: 4%;  animation-delay: 2.1s; }
+.d4 { top: 62%; right: 6%; animation-delay: 0.6s; }
+.d5 { top: 80%; left: 10%; animation-delay: 1.8s; }
+.d6 { top: 34%; right: 4%; animation-delay: 2.6s; font-size: 3.2rem; }
+.d7 { top: 88%; right: 14%; animation-delay: 1s;  font-size: 3rem; }
+.d8 { top: 72%; left: 2%;  animation-delay: 3.1s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(-22px) rotate(6deg); }
+}
+
+/* ---------- Karta ---------- */
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 32px;
+  padding: 0 26px 30px;
+  box-shadow: var(--shadow);
+  border: 4px solid var(--green-light);
+  overflow: hidden;
+}
+
+/* ---------- Banner s nadpisem ---------- */
+.banner {
+  position: relative;
+  margin: 0 -26px 12px;
+  padding: 26px 20px 30px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      var(--green) 0 18px,
+      var(--green-dark) 18px 36px
+    );
+  border-bottom: 5px dashed var(--sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+.banner h1 {
+  font-family: "Winky Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 6.5vw, 2.1rem);
+  line-height: 1.1;
+  margin: 0;
+  color: #fff;
+  text-shadow: 2px 3px 0 var(--green-dark), 0 0 14px rgba(0, 0, 0, 0.2);
+}
+.banner .name {
+  color: var(--sand-deep);
+  font-size: 1.15em;
+  display: inline-block;
+  margin-top: 4px;
+}
+.banner-dino {
+  font-size: clamp(2rem, 9vw, 3rem);
+  animation: wiggle 3s ease-in-out infinite;
+}
+.banner-dino.right { animation-delay: 0.6s; }
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-8deg); }
+  50%      { transform: rotate(8deg); }
+}
+
+.dinolife-badge {
+  position: absolute;
+  right: 18px;
+  bottom: -14px;
+  background: var(--sand-deep);
+  color: var(--ink);
+  font-size: 1.15rem;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: rotate(-3deg);
+  z-index: 10;
+}
+
+/* ---------- Jízda na T-rexovi ---------- */
+.ride {
+  position: relative;
+  width: 300px;
+  height: 360px;
+  max-width: 100%;
+  margin: 6px auto 0;
+}
+.ride::after { /* poskakující stín */
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  width: 210px;
+  height: 22px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse,
+    rgba(31, 90, 45, 0.3) 0%,
+    rgba(31, 90, 45, 0) 70%
+  );
+  z-index: 0;
+  animation: shadowPulse 1.4s ease-in-out infinite;
+}
+.scene-bob {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 92%;
+  animation: ride 1.4s ease-in-out infinite;
+  z-index: 1;
+}
+.ride-dino {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.rider {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  left: 110px;
+  top: 86px;
+  z-index: 2;
+}
+
+/* kývající se fotka-hlava */
+.rider-head {
+  position: absolute;
+  top: 30px;
+  left: 120px;
+  width: 106px;
+  height: 106px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #fff;
+  background: #f6c9a0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transform-origin: 50% 92%;
+  animation: headWobble 1.4s ease-in-out infinite;
+  z-index: 3;
+}
+.rider-head img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 5% 40%;
+  transform: scale(1.64);
+  transform-origin: 50% 38%;
+}
+
+.age-badge {
+  position: absolute;
+  z-index: 4;
+  top: 22px;
+  left: 94px;
+  background: var(--orange);
+  color: #fff;
+  font-family: "Winky Sans", sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  padding: 8px 11px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 6px 14px rgba(232, 133, 43, 0.5);
+  transform: rotate(-16deg);
+}
+
+@keyframes ride {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  30%      { transform: translateY(-16px) rotate(1.5deg); }
+  60%      { transform: translateY(0) rotate(-1.5deg); }
+  80%      { transform: translateY(-7px) rotate(0.5deg); }
+}
+@keyframes headWobble {
+  0%, 100% { transform: rotate(-9deg); }
+  50%      { transform: rotate(9deg); }
+}
+@keyframes shadowPulse {
+  0%, 100% { transform: translateX(-50%) scale(1);   opacity: 0.8; }
+  30%      { transform: translateX(-50%) scale(0.7); opacity: 0.45; }
+  60%      { transform: translateX(-50%) scale(1);   opacity: 0.8; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scene-bob, .rider-head, .ride::after { animation: none; }
+}
+
+/* ---------- Úvodní text ---------- */
+.lead {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.45;
+  margin: 14px 6px 22px;
+  color: var(--green-dark);
+}
+
+/* ---------- Formulář ---------- */
+.rsvp {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: var(--sand);
+  border: 3px dashed var(--orange);
+  border-radius: 24px;
+  padding: 22px 18px;
+}
+
+.attend {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.attend legend {
+  font-family: "Winky Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-bottom: 12px;
+  text-align: center;
+  width: 100%;
+}
+.choices {
+  display: flex;
+  gap: 12px;
+}
+.choice {
+  flex: 1;
+  cursor: pointer;
+}
+.choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.choice span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 8px;
+  border-radius: 16px;
+  font-family: "Winky Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  background: #fff;
+  border: 3px solid #e3e3e3;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+.choice:active span { transform: scale(0.96); }
+.choice.yes input:checked + span {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green-dark);
+  box-shadow: 0 8px 18px rgba(58, 167, 96, 0.4);
+}
+.choice.no input:checked + span {
+  background: var(--red);
+  color: #fff;
+  border-color: #d64545;
+  box-shadow: 0 8px 18px rgba(255, 107, 107, 0.4);
+}
+.choice input:focus-visible + span {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field-label {
+  font-family: "Winky Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink);
+  padding-left: 4px;
+}
+.field input {
+  font-family: "Winky Sans", sans-serif;
+  font-size: 1.1rem;
+  padding: 13px 16px;
+  border-radius: 16px;
+  border: 3px solid #e3e3e3;
+  background: #fff;
+  transition: border-color 0.15s ease;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--green);
+}
+
+.submit-btn {
+  font-family: "Winky Sans", sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: #fff;
+  background: linear-gradient(180deg, var(--orange) 0%, var(--orange-dark) 100%);
+  border: none;
+  border-radius: 18px;
+  padding: 15px;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(232, 133, 43, 0.45);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.submit-btn:hover { transform: translateY(-2px); }
+.submit-btn:active { transform: translateY(1px) scale(0.99); }
+
+/* ---------- Stav odeslání ---------- */
+.status {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  min-height: 1.4em;
+  margin: 14px 0 0;
+}
+.status.ok  { color: var(--green-dark); }
+.status.err { color: var(--red); }
+
+/* ---------- Poznámka ---------- */
+.note {
+  margin: 22px 0 0;
+  padding: 16px 18px;
+  background: var(--green-light);
+  border-radius: 18px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--green-dark);
+  text-align: center;
+}
+
+/* ---------- Místo konání ---------- */
+.place {
+  margin-top: 22px;
+  text-align: center;
+}
+.place h2 {
+  font-family: "Winky Sans", sans-serif;
+  font-size: 1.2rem;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.place-name {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+}
+.place-name a {
+  color: var(--green-dark);
+  font-weight: 700;
+}
+.map-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-family: "Winky Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  background: var(--green);
+  padding: 12px 22px;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(58, 167, 96, 0.4);
+  transition: transform 0.12s ease;
+}
+.map-btn:hover { transform: translateY(-2px); }
+
+/* ---------- Patička ---------- */
+.foot {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-top: 24px;
+  letter-spacing: 6px;
+}
+
+@media (max-width: 380px) {
+  .card { padding: 0 16px 24px; }
+  .banner { margin: 0 -16px 12px; }
+  .ride { width: 260px; height: 312px; }
+  .rider { width: 130px; height: 130px; left: 96px; top: 82px; }
+  .rider-head { top: 50px; left: 104px; width: 92px; height: 92px; }
+  .age-badge { top: 14px; left: 82px; }
+}

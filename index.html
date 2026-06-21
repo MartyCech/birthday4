@@ -238,9 +238,17 @@
         if (res.ok) {
           showResult(ucast);
         } else {
+          let detail = "";
+          try {
+            const data = await res.json();
+            if (data && Array.isArray(data.errors)) {
+              detail = data.errors.map((x) => x.message).join(" ");
+            }
+          } catch (_) {}
           status.className = "status err";
           status.textContent =
-            "Něco se nepovedlo. Zkus to prosím znovu. 🦴";
+            "Něco se nepovedlo. Zkus to prosím znovu. 🦴" +
+            (detail ? " (" + detail + ")" : "");
           isSubmitting = false;
           if (submitBtn) submitBtn.disabled = false;
         }
